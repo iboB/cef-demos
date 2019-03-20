@@ -12,6 +12,18 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake
 )
 
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
+    set(CEFDEMOS_OS_MACOSX 1)
+    set(CEFDEMOS_OS_POSIX 1)
+elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+    set(CEFDEMOS_OS_LINUX 1)
+    set(CEFDEMOS_OS_POSIX 1)
+elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
+    set(CEFDEMOS_OS_WINDOWS 1)
+else()
+    message(FATAL_ERROR "CEF-Demos: Unsupported target platform")
+endif()
+
 include(src_group)
 
 # configure
