@@ -25,9 +25,15 @@ public:
     DISALLOW_COPY_AND_ASSIGN(MinimalClient);
 };
 
+
 int main(int argc, char* argv[])
 {
+#if defined(_WIN32)
+    CefEnableHighDPISupport();
+    CefMainArgs args(GetModuleHandle(NULL));
+#else
     CefMainArgs args(argc, argv);
+#endif
 
     void* windowsSandboxInfo = NULL;
 
@@ -54,6 +60,11 @@ int main(int argc, char* argv[])
 
 
     CefWindowInfo windowInfo;
+
+#if defined(_WIN32)
+    // On Windows we need to specify certain flags that will be passed to CreateWindowEx().
+    windowInfo.SetAsPopup(NULL, "simple");
+#endif
     CefBrowserSettings browserSettings;
     CefBrowserHost::CreateBrowser(windowInfo, new MinimalClient, "https://github.com/iboB/cef-demos", browserSettings, nullptr);
 

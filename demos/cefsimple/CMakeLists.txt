@@ -1,13 +1,6 @@
 set(srcs)
 set(res)
 
-if(CEFDEMOS_OS_WINDOWS)
-    src_group(Resources res
-        resources/win/cef.exe.manifest
-        resources/win/compatibility.manifest
-    )
-endif()
-
 src_group(sources srcs
     simple_app.cc
     simple_app.h
@@ -34,8 +27,12 @@ endif()
 
 add_executable(cefsimple
     ${srcs}
-    ${res}
+    ${CEF_CMAKE_EXECUTABLE_RESOURCES}
 )
+
+if(CEFDEMOS_OS_WINDOWS)
+    set_target_properties(cefsimple PROPERTIES WIN32_EXECUTABLE 1)
+endif()
 
 target_link_libraries(cefsimple
     cefdll_wrapper
