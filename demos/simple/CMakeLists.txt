@@ -1,4 +1,3 @@
-set(res)
 add_executable(simple
     simple.cpp
     ${CEF_CMAKE_EXECUTABLE_RESOURCES}

@@ -1,5 +1,4 @@
 set(srcs)
-set(res)
 
 src_group(sources srcs
     simple_app.cc
