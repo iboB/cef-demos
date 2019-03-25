@@ -9,7 +9,8 @@ Small CEF Demos
 The simple demos have no external dependencies other than CEF and the cef.dll wrapper.
 
 * **cefsimple** - A copy of the cefsimple test from the CEF project. Here to make sure everything is backwards compatible.
-* **simple** - A bare-bones minimalistic example which launches a browser.
+* **simple** - A bare-bones minimal example which launches a browser.
+* **simple-headless** - A minimal headless browser example
 
 The other demos depend on the `demos-common` library defined [here](common).
 
