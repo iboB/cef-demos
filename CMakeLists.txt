@@ -32,4 +32,6 @@ set(CEF_USE_SANDBOX OFF CACHE BOOL "Force turning off of sandbox")
 include(cef_cmake)
 add_subdirectory(cef-cmake)
 
+add_subdirectory(common)
+
 add_subdirectory(demos)
