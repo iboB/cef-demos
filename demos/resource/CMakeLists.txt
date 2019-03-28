@@ -1,5 +1,5 @@
 add_executable(resource
-    main.cpp
+    resource.cpp
     ${CEF_CMAKE_EXECUTABLE_RESOURCES}
 )
 
