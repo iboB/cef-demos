@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
     windowInfo.SetAsPopup(NULL, "simple");
 #endif
     CefBrowserSettings browserSettings;
-    CefBrowserHost::CreateBrowser(windowInfo, new MinimalClient, "https://github.com/iboB/cef-demos", browserSettings, nullptr);
+    CefBrowserHost::CreateBrowser(windowInfo, new MinimalClient, "https://ibob.github.io/cef-demos/html/hello-demos.html", browserSettings, nullptr);
 
     CefRunMessageLoop();
 
