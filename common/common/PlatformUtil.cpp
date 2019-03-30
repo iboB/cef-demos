@@ -55,9 +55,6 @@ std::string PlatformUtil::getCurrentExecutablePath()
     modulePath = path;
 
 #else
-    // we got a relative path :(
-    // that means that we're on some crazy posix platform which doesn't
-    // return proper dli_fname
     // retrieve the executable path and hope for the best
     char buff[2048];
     size_t len = readlink("/proc/self/exe", buff, sizeof(buff) - 1);

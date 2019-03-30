@@ -250,7 +250,8 @@ int main(int argc, char* argv[])
     auto browser = CefBrowserHost::CreateBrowserSync(windowInfo, new HeadlessClient, URL, browserSettings, nullptr);
 
     // main loop
-    while (!HTML_LoadingDone) {
+    while (!HTML_LoadingDone)
+    {
         CefDoMessageLoopWork();
         std::this_thread::sleep_for(std::chrono::milliseconds(15));
     }

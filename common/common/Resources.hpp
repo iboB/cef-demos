@@ -18,7 +18,7 @@ class Resources
 {
 public:
     // setup a resource manager to associate uris below `uri` to point to files below the directory `dir`
-    static void SetupResourceManager(CefRefPtr<CefResourceManager> resource_manager, std::string uri, std::string dir);
+    static void setupResourceManagerDirectoryProvider(CefRefPtr<CefResourceManager> resource_manager, std::string uri, std::string dir);
 };
 
 }

@@ -10,11 +10,11 @@
 namespace cefdemos
 {
 
-void Resources::SetupResourceManager(CefRefPtr<CefResourceManager> resource_manager, std::string uri, std::string dir)
+void Resources::setupResourceManagerDirectoryProvider(CefRefPtr<CefResourceManager> resource_manager, std::string uri, std::string dir)
 {
     if (!CefCurrentlyOn(TID_IO)) {
         // Execute on the browser IO thread.
-        CefPostTask(TID_IO, base::Bind(SetupResourceManager, resource_manager, uri, dir));
+        CefPostTask(TID_IO, base::Bind(&Resources::setupResourceManagerDirectoryProvider, resource_manager, uri, dir));
         return;
     }
 
