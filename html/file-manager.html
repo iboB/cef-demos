@@ -19,13 +19,16 @@ body {
 .filelist {
     background-color: khaki;
     padding: 10px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    height: calc(100vh - 43px);
 }
 .entry {
     padding-left: 10px;
     padding-top: 2px;
     padding-bottom: 2px;
 }
-.dir:hover {
+.dir:hover, .up:hover {
     background-color: white;
     cursor: pointer;
 }
@@ -85,6 +88,10 @@ let requestContents = path => {
             pathText.innerHTML = path;
             const r = JSON.parse(json);
             let html = '';
+            if (path !== '') {
+                const up = path.substr(0, path.lastIndexOf('/'));
+                html += `<div class="entry up" onclick="requestContents('${up}')">^</div>`;
+            }
             for (const d of r.dirs) {
                 html += `<div class="entry dir" onclick="requestContents('${path + '/' + d}')">${d}</div>`;
             }
