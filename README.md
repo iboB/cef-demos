@@ -14,7 +14,8 @@ The simple demos have no external dependencies other than CEF and the cef.dll wr
 
 The other demos depend on the `demos-common` library defined [here](common).
 
-* **resource** - Uses a resource manager to load files from the `html` subdirectory 
+* **resource** - Uses a resource manager to load files from the `html` subdirectory
+* **file-manager** - A file manager demo with HTML GUI 
 
 ## License and copyright
 

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>File Manager :: CEF Demos</title>
+
+<style>
+* { margin:0; padding:0; } /* clear all */
+body {
+    background-color: darkgray;
+    font-family: monospace;
+    font-size: large;
+}
+.pathtext {
+    font-size: larger;
+    background-color: darkkhaki;
+    padding: 10px;
+}
+.filelist {
+    background-color: khaki;
+    padding: 10px;
+}
+.entry {
+    padding-left: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.dir:hover {
+    background-color: white;
+    cursor: pointer;
+}
+.dir::after {
+    content: " >";
+}
+.file:hover {
+    background-color: lightgray;
+}
+</style>
+
+</head>
+
+<body>
+<div class="pathtext">Path: <span id="pathtext"></span></div>
+<div id="filelist" class="filelist"></div>
+</body>
+
+<script>
+'use strict';
+
+// mock
+if (!window.cefQuery) {
+    window.cefQuery = req => {
+        const split = req.request.split(':');
+        const r = split[0];
+        const arg = split[1];
+
+        if (r === 'contents') {
+            if (arg === '') {
+                return req.onSuccess(JSON.stringify({
+                    files: ['file1', 'file 2', 'other file'],
+                    dirs: ['dir0', 'some other dir'],
+                }));
+            }
+            else if (arg === '/dir0') {
+                return req.onSuccess(JSON.stringify({
+                    files: ['dfile', 'dfile 45'],
+                    dirs: ['another dir'],
+                }));
+            }
+            return req.onFailure(1, 'Unknown dir ' + arg);
+        }
+
+        req.onFailure(0, 'Unknown request');
+    };
+}
+
+const pathText = document.getElementById('pathtext');
+const fileList = document.getElementById('filelist');
+
+let requestContents = path => {
+    path = path || '';
+    window.cefQuery({
+        request: 'contents:' + path,
+        onSuccess: json => {
+            pathText.innerHTML = path;
+            const r = JSON.parse(json);
+            let html = '';
+            for (const d of r.dirs) {
+                html += `<div class="entry dir" onclick="requestContents('${path + '/' + d}')">${d}</div>`;
+            }
+            for (const f of r.files) {
+                html += `<div class="entry file">${f}</div>`;
+            }
+            fileList.innerHTML = html;
+        },
+        onFailure: (code, text) => {
+            console.error(code, text);
+        }
+    });
+};
+
+requestContents();
+
+</script>
+
+</html>
