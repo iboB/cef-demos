@@ -11,9 +11,10 @@
 #   include <cstdlib>
 #   include "win_dirent.h"
 #else
-#   #include <dirent.h>
+#   include <dirent.h>
 #endif
 
+#include <cstring>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -37,7 +38,7 @@ FileManager::FileManager()
     m_path += getenv("homepath");
     normalizePath(m_path);
 #else
-    m_path = "~";
+    m_path = getenv("HOME");
 #endif
 }
 

@@ -219,7 +219,8 @@ int main(int argc, char* argv[])
 #endif
 
     CefRefPtr<CefApp> app = nullptr;
-    if (commandLine->GetSwitchValue("type") == "renderer") {
+    std::string appType = commandLine->GetSwitchValue("type");
+    if (appType == "renderer" || appType == "zygote") {
         app = new RendererApp;
     }
     int result = CefExecuteProcess(args, app, windowsSandboxInfo);

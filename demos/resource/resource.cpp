@@ -59,7 +59,7 @@ private:
     DISALLOW_COPY_AND_ASSIGN(ResourceClient);
 };
 
-int main()
+int main(int argc, char* argv[])
 {
 #if defined(_WIN32)
     CefEnableHighDPISupport();
